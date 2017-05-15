@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=player\ translate
+comment0.target=GameGui(Player,\ Interpreter)
+comment1.params=e
+comment1.target=void\ adjustmentValueChanged(java.awt.event.AdjustmentEvent)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3
