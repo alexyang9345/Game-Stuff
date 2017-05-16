@@ -121,24 +121,11 @@ public class GameGui
                             }                
                             
                             ///**
-                            
                             //I don't know how to get the other stuff to stop displaying...
-                            
-                            endT.setText("HERE ARE WHERE THE STATS SHOULD BE :D");
-                            endT.setWrapStyleWord(true);
-                            endP.add(endT);
-                            
-                            end.removeAll();
-                            endT.removeAll();
-                            //endT.setText("");
                             endT.setText(player.getCurrentRoom().getDescription() +"\nGame Over!\n" + "You collected loot worth " + value + " gold!\n" + "QuestCo values your services, \nand recommends that you try harder next time!");
                             endP.add(endT);
                             //**/ #uncomment these two things to make just the gameover image appear by itself
                             endP.add(new JLabel(new ImageIcon("images/gameover.jpg")));
-                            
-                           
-                            end.add(endP);
-                            end.setVisible(true);
                             
                         }
                         else
@@ -159,11 +146,10 @@ public class GameGui
                             endT.setText(player.getCurrentRoom().getDescription() +"\n\n\nCongratulations, you survived!\n" + "You collected loot worth " + value + " gold!\n" + "QuestCo values your services!");
                             endP.add(endT);
                             //**/ #uncomment these two things to make just the victory picture appear by itself
-                            end.add(endP);
-                            end.setVisible(true);
                             
                         }
-                        
+                        end.add(endP);
+                        end.setVisible(true);
                     }
                 }
             });
