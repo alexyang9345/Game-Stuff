@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=player
+comment0.target=Interpreter(Player)
+comment1.params=input\ cRoom
+comment1.target=java.lang.String\ actionPerformed(java.lang.String,\ Room)
+numComments=2
