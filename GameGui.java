@@ -2,23 +2,45 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.*;
+import java.util.*;
 
 public class GameGui
 {
     public GameGui(Player player, Interpreter translate) throws SecurityException, NoSuchMethodException, IllegalArgumentException,
             IllegalAccessException, InvocationTargetException
     {
+        //Title slate
+        Scanner scan = new Scanner(System.in);
+        
+        JFrame title = new JFrame();
+        JPanel titleP = new JPanel();
+        title.setSize(1300,700);
+        title.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        titleP.add(new JLabel(new ImageIcon("images/title_screen.jpg")));
+        title.add(titleP);
+        title.setVisible(true);
+        try 
+        {
+            Thread.sleep(4000);
+        } 
+        catch(InterruptedException ex) 
+        {
+            Thread.currentThread().interrupt();
+        }
+        title.setVisible(false);
+        
         //End slate
+        
         JFrame end = new JFrame();
         end.setSize(1300,700);
         end.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         JPanel endP = new JPanel();
         JTextArea endT = new JTextArea(30,30);
         endT.setEditable(false);
         endT.setLineWrap(true);
         endT.setWrapStyleWord(true);
-        endP.add(endT);
-        
+
         //Sets up frame
         JFrame f = new JFrame();
         f.setVisible(true);
@@ -89,23 +111,59 @@ public class GameGui
                         //f.setVisible(false);
                         if(player.getHealthInt() <= 0)
                         {
-                            endT.setText("Unfortunately, you have died...");
+                            int value = 0;
+                            for(int k = 0; k < player.getItems().size(); k++)
+                            {
+                                if(player.getItems().get(k) != null)
+                                {
+                                    value += player.getItems().get(k).getValue();
+                                }
+                            }                
+                            
+                            ///**
+                            
+                            //I don't know how to get the other stuff to stop displaying...
+                            
+                            endT.setText("HERE ARE WHERE THE STATS SHOULD BE :D");
+                            endT.setWrapStyleWord(true);
+                            endP.add(endT);
+                            
+                            end.removeAll();
+                            endT.removeAll();
+                            //endT.setText("");
+                            endT.setText(player.getCurrentRoom().getDescription() +"\nGame Over!\n" + "You collected loot worth " + value + " gold!\n" + "QuestCo values your services, \nand recommends that you try harder next time!");
+                            endP.add(endT);
+                            //**/ #uncomment these two things to make just the gameover image appear by itself
+                            endP.add(new JLabel(new ImageIcon("images/gameover.jpg")));
+                            
+                           
+                            end.add(endP);
+                            end.setVisible(true);
+                            
                         }
                         else
                         {
-                        int value = 0;
-                        for(int k = 0; k < player.getItems().size(); k++)
-                        {
-                            if(player.getItems().get(k) != null)
+                            int value = 0;
+                            for(int k = 0; k < player.getItems().size(); k++)
                             {
-                                value += player.getItems().get(k).getValue();
+                                if(player.getItems().get(k) != null)
+                                {
+                                    value += player.getItems().get(k).getValue();
+                                }
                             }
+                            /**
+                             * same problem with not being able to delete previous messages
+                             */
+                            endP.add(new JLabel(new ImageIcon("images/win.jpg")));
+                            ///**
+                            endT.setText(player.getCurrentRoom().getDescription() +"\n\n\nCongratulations, you survived!\n" + "You collected loot worth " + value + " gold!\n" + "QuestCo values your services!");
+                            endP.add(endT);
+                            //**/ #uncomment these two things to make just the victory picture appear by itself
+                            end.add(endP);
+                            end.setVisible(true);
+                            
                         }
                         
-                        endT.setText(player.getCurrentRoom().getDescription() +"\nYou survived!\n" + "You collected loot worth " + value + " gold!\n" + "QuestCo values your services!");
-                        }
-                        end.add(endP);
-                        end.setVisible(true);
                     }
                 }
             });
